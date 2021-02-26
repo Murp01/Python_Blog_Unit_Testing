@@ -1,6 +1,7 @@
 from unittest import TestCase
 from blog import Blog
 
+
 class BlogTest(TestCase):
 
     def test_create_blog(self):
@@ -11,14 +12,12 @@ class BlogTest(TestCase):
 
         self.assertListEqual([], b.posts)
 
-
     def test_repr(self):
         b = Blog('Test', 'Test Author')
         b2 = Blog('autotest', 'Paul Murphy')
 
         self.assertEqual(b.__repr__(), 'Test by Test Author (0 posts)')
         self.assertEqual(b2.__repr__(), 'autotest by Paul Murphy (0 posts)')
-
 
     def test_repr_multiple_posts(self):
         b = Blog('Test', 'Test Author')
