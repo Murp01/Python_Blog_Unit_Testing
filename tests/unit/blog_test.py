@@ -10,3 +10,31 @@ class BlogTest(TestCase):
         self.assertEqual('Test Author', b.author)
 
         self.assertListEqual([], b.posts)
+
+
+    def test_repr(self):
+        b = Blog('Test', 'Test Author')
+        b2 = Blog('autotest', 'Paul Murphy')
+
+        self.assertEqual(b.__repr__(), 'Test by Test Author (0 posts)')
+        self.assertEqual(b2.__repr__(), 'autotest by Paul Murphy (0 posts)')
+
+
+    def test_repr_multiple_posts(self):
+        b = Blog('Test', 'Test Author')
+        b.posts = ['test']
+        b2 = Blog('My Day', 'Rolf')
+        b2.posts = ['test', 'another']
+
+        self.assertEqual(b.__repr__(), 'Test by Test Author (1 post)')
+        self.assertEqual(b2.__repr__(), 'My Day by Rolf (2 posts)')
+
+    def test_create_post_in_blog(self):
+        b = Blog('Test', 'Test Author')
+        b.create_post('Test Post', 'Test Content')
+
+        #Assert only one post is in blog
+        self.assertEqual(len(b.posts), 1)
+        #assertst that the first post in the blog has the title 'Test Post'
+        self.assertEqual(b.posts[0].title, 'Test Post')
+        self.assertEqual(b.posts[0].content, 'Test Content')
